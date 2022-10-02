@@ -1,8 +1,7 @@
 import './App.css';
-import getSub from './handlers/reddit_fetch';
 import React, { useEffect, useState } from "react";
 import {Button} from 'react-bootstrap';
-import uploadtoInstagram from './handlers/instagram_upload';
+import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
 
 const captions = [
