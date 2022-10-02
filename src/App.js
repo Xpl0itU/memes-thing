@@ -18,10 +18,10 @@ const captions = [
 ];
 
 function App() {
-  let images = getSub();
+  const [sub, setSub] = useState("memes");
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
+  let images = getSub(sub);
 
-  // Check if the user is authenticated with Facebook
   useEffect(() => {
     window.FB.getLoginStatus((response) => {
       setFacebookUserAccessToken(response.authResponse?.accessToken);
@@ -34,7 +34,6 @@ function App() {
         setFacebookUserAccessToken(response.authResponse?.accessToken);
       },
       {
-        // Scopes that allow us to publish content to Instagram
         scope: "public_profile,email,instagram_basic,instagram_content_publish",
       }
     );
@@ -48,18 +47,38 @@ function App() {
   return (
     <>
       <div>
-        <div className="flex space-x-9">
-          <p>Login: </p>
-          {facebookUserAccessToken ? (
-              <button onClick={logOutOfFB} className="btn action-btn">
-                Log out of Facebook
-              </button>
-            ) : (
-              <button onClick={logInToFB} className="btn action-btn">
-                Login with Facebook
-              </button>
-            )}
+        <div class="ml-2">
+          <h3 class="text-3xl font-bold">Current subreddit: { sub }</h3>
+          <div class="pt-2"></div>
+          <form value={sub} onChange={(e) => setSub(e.target.value)}>
+            <div class="box">
+                <label for="sub">Subreddit:</label>
+                <select name="sub" id="sub" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
+                  onchange="this.form.submit()">
+                  <option>Select a subreddit</option>
+                  <option value="memes">r/memes</option>
+                  <option value="meme">r/meme</option>
+                  <option value="dankmemes">r/dankmemes</option>
+                  <option value="Memes_Of_The_Dank">r/Memes_Of_The_Dank</option>
+                  <option value="me_irl">r/me_irl</option>
+                </select>
+              </div>
+          </form>
+          <div class="pt-2"></div>
+            <div className="flex space-x-9">
+              <p>Login: </p>
+              {facebookUserAccessToken ? (
+                  <button onClick={logOutOfFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                    Log out of Facebook
+                  </button>
+                ) : (
+                  <button onClick={logInToFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                    Login with Facebook
+                  </button>
+                )}
+            </div>
         </div>
+        <div class="pt-2"></div>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
             {images.map(image=>(
               <div class="w-full rounded">
