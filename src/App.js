@@ -1,7 +1,9 @@
 import './App.css';
 import getSub from './handlers/reddit_fetch';
 import React, { useEffect, useState } from "react";
+import {Button} from 'react-bootstrap';
 import uploadtoInstagram from './handlers/instagram_upload';
+import UploadModal from './components/UploadModal';
 
 const captions = [
   "#meme #memes #funny #dankmemes #dank #lol #lmao #dank #funnymemes #memesdaily #dankmeme #f #dankmemes #follow #cringe #like #lmfao #anime #hilarious #comedy #offensivememes #fortnite #filthyfrank #nichememes #offensive #jokes #l #bhfyp",
@@ -68,13 +70,13 @@ function App() {
             <div className="flex space-x-9">
               <p>Login: </p>
               {facebookUserAccessToken ? (
-                  <button onClick={logOutOfFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                  <Button onClick={logOutOfFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                     Log out of Facebook
-                  </button>
+                  </Button>
                 ) : (
-                  <button onClick={logInToFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                  <Button onClick={logInToFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                     Login with Facebook
-                  </button>
+                  </Button>
                 )}
             </div>
         </div>
@@ -82,9 +84,7 @@ function App() {
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
             {images.map(image=>(
               <div class="w-full rounded">
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {uploadtoInstagram(facebookUserAccessToken, image, 'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)])}}>
-                  Upload
-                </button>
+                <UploadModal token={facebookUserAccessToken} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
                 <div className="pt-1"></div>
                 <img src={image} alt="" className="rounded-xl" height="200" width="200"/>
               </div>
