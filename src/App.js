@@ -1,6 +1,7 @@
 import './App.css';
 import getSub from './handlers/reddit_fetch';
 import React, { useEffect, useState } from "react";
+import uploadtoInstagram from './handlers/instagram_upload';
 
 const captions = [
   "%23meme %23memes %23funny %23dankmemes %23dank %23lol %23lmao %23dank %23funnymemes %23memesdaily %23dankmeme %23f %23dankmemes %23follow %23cringe %23like %23lmfao %23anime %23hilarious %23comedy %23offensivememes %23fortnite %23filthyfrank %23nichememes %23offensive %23jokes %23l %23bhfyp",
@@ -18,10 +19,6 @@ const captions = [
 
 function App() {
   let images = getSub();
-  console.log(images);
-  const [imageUrl, setImageUrl] = useState("");
-  const [postCaption, setPostCaption] = useState("");
-  const [isSharingPost, setIsSharingPost] = useState(false);
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
 
   // Check if the user is authenticated with Facebook
@@ -48,78 +45,6 @@ function App() {
       setFacebookUserAccessToken(undefined);
     });
   };
-
-  /* --------------------------------------------------------
-   *             INSTAGRAM AND FACEBOOK GRAPH APIs
-   * --------------------------------------------------------
-   */
-
-  const getFacebookPages = () => {
-    return new Promise((resolve) => {
-      window.FB.api(
-        "me/accounts",
-        { access_token: facebookUserAccessToken },
-        (response) => {
-          resolve(response.data);
-        }
-      );
-    });
-  };
-
-  const createMediaObjectContainer = (instagramAccountId) => {
-    return new Promise((resolve) => {
-      window.FB.api(
-        `${instagramAccountId}/media`,
-        "POST",
-        {
-          access_token: facebookUserAccessToken,
-          image_url: imageUrl,
-          caption: postCaption,
-        },
-        (response) => {
-          resolve(response.id);
-        }
-      );
-    });
-  };
-
-  const publishMediaObjectContainer = (
-    instagramAccountId,
-    mediaObjectContainerId
-  ) => {
-    return new Promise((resolve) => {
-      window.FB.api(
-        `${instagramAccountId}/media_publish`,
-        "POST",
-        {
-          access_token: facebookUserAccessToken,
-          creation_id: mediaObjectContainerId,
-        },
-        (response) => {
-          resolve(response.id);
-        }
-      );
-    });
-  };
-
-  const shareInstagramPost = async () => {
-    setIsSharingPost(true);
-    const instagramAccountId = "17841417742728074";
-    const mediaObjectContainerId = await createMediaObjectContainer(
-      instagramAccountId
-    );
-
-    await publishMediaObjectContainer(
-      instagramAccountId,
-      mediaObjectContainerId
-    );
-
-    setIsSharingPost(false);
-
-    // Reset the form state
-    setImageUrl("");
-    setPostCaption("");
-  };
   return (
     <>
       <div>
@@ -138,7 +63,7 @@ function App() {
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
             {images.map(image=>(
               <div class="w-full rounded">
-                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {setImageUrl(image); setPostCaption('For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]); shareInstagramPost();}}>
+                <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {uploadtoInstagram(facebookUserAccessToken, image, 'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)])}}>
                   Upload
                 </button>
                 <div className="pt-1"></div>
