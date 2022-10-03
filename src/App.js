@@ -66,13 +66,13 @@ function App() {
           </form>
           <div class="pt-2"/>
             <div className="flex space-x-9">
-              <p>Login: </p>
+              <label for="loginButton">Login: </label>
               {facebookUserAccessToken ? (
-                  <button onClick={logOutOfFB} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                  <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                     Log out of Facebook
                   </button>
                 ) : (
-                  <button onClick={logInToFB} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                  <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                     Login with Facebook
                   </button>
                 )}
