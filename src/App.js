@@ -55,7 +55,6 @@ function App() {
                 <label for="sub">Subreddit:</label>
                 <select name="sub" id="sub" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
                   onchange="this.form.submit()">
-                  <option>Select a subreddit</option>
                   <option value="memes">r/memes</option>
                   <option value="meme">r/meme</option>
                   <option value="dankmemes">r/dankmemes</option>
