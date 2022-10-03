@@ -49,7 +49,7 @@ function App() {
     <>
       <div>
         <div class="ml-2">
-          <h3 class="text-3xl font-bold">Current subreddit: { sub }</h3>
+          <h3 class="text-3xl font-bold">Current subreddit: {sub}</h3>
           <div class="pt-2"></div>
           <form value={sub} onChange={(e) => setSub(e.target.value)}>
             <div class="box">
@@ -65,21 +65,21 @@ function App() {
                 </select>
               </div>
           </form>
-          <div class="pt-2"></div>
+          <div class="pt-2"/>
             <div className="flex space-x-9">
               <p>Login: </p>
               {facebookUserAccessToken ? (
-                  <Button onClick={logOutOfFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                  <button onClick={logOutOfFB} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                     Log out of Facebook
-                  </Button>
+                  </button>
                 ) : (
-                  <Button onClick={logInToFB} className="btn action-btn bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                  <button onClick={logInToFB} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                     Login with Facebook
-                  </Button>
+                  </button>
                 )}
             </div>
         </div>
-        <div class="pt-2"></div>
+        <div class="pt-2"/>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
             {images.map(image=>(
               <div class="w-full rounded">
