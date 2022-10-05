@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
 import Image from './components/Image';
-import config from './config.js';
+import {config} from './config.js';
 
 function App() {
   const [sub, setSub] = useState("memes");
