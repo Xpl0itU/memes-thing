@@ -2,6 +2,7 @@ import './App.css';
 import React, { useEffect, useState } from "react";
 import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
+import Image from './components/Image';
 
 const captions = [
   "#meme #memes #funny #dankmemes #dank #lol #lmao #dank #funnymemes #memesdaily #dankmeme #f #dankmemes #follow #cringe #like #lmfao #anime #hilarious #comedy #offensivememes #fortnite #filthyfrank #nichememes #offensive #jokes #l #bhfyp",
@@ -83,7 +84,7 @@ function App() {
               <div class="w-full rounded">
                 <UploadModal token={facebookUserAccessToken} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
                 <div className="pt-1"></div>
-                <img src={image} alt="" className="rounded-xl" height="200" width="200"/>
+                <Image src={image} alt="" className="rounded-xl" height="200" width="200"/>
               </div>
             ))}
         </div>
