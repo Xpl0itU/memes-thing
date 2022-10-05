@@ -6,7 +6,7 @@ import Image from './components/Image';
 import { captions, subreddits } from './config';
 
 function App() {
-  const [sub, setSub] = useState("memes");
+  const [sub, setSub] = useState(subreddits[0]);
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
   let images = getSub(sub);
 
