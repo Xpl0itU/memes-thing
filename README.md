@@ -2,6 +2,6 @@
 Get memes from various subreddits and upload them to instagram
 
 ## Getting started
-Change the Facebook App ID to yours in src/initFacebookSDK.js and put your instagram page id (get it when logging in with Facebook) in src/handlers/instagram_upload.js.
+Configure everything you want in src/config.js, if you only setup FACEBOOK_APP_ID and INSTAGRAM_PAGE_ID you'll be set, but you can change the subreddits or the hashtags too.
 
 You need an instagram business account linked with a Facebook page for this to work, weird restrictions of the API.
