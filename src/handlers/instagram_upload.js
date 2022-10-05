@@ -1,5 +1,7 @@
 import {PostPagePhotoMediaRequest, PostPublishMediaRequest} from "instagram-graph-api";
 
+const INSTAGRAM_PAGE_ID = '17841417742728074';
+
 const waitUntil = (condition) => {
     return new Promise((resolve) => {
         let interval = setInterval(() => {
@@ -16,7 +18,7 @@ function uploadtoInstagram(token, imageURL, imageCaption, callback) {
     let isLoading = true;
     const request = new PostPagePhotoMediaRequest(
         token,
-        '17841417742728074',
+        INSTAGRAM_PAGE_ID,
         imageURL,
         imageCaption
       );
@@ -24,7 +26,7 @@ function uploadtoInstagram(token, imageURL, imageCaption, callback) {
         console.log(response.data.id);
         const igRequest = new PostPublishMediaRequest(
             token,
-            '17841417742728074',
+            INSTAGRAM_PAGE_ID,
             response.data.id
         );
 
