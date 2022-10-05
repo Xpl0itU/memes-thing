@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
 import Image from './components/Image';
-import {config} from './config.js';
+import { captions, subreddits } from './config';
 
 function App() {
   const [sub, setSub] = useState("memes");
@@ -43,7 +43,7 @@ function App() {
                 <label for="sub">Subreddit:</label>
                 <select name="sub" id="sub" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
                   onchange="this.form.submit()">
-                  {config.subreddits.map(subreddit=>(
+                  {subreddits.map(subreddit=>(
                       <option value={subreddit}>r/{subreddit}</option>
                   ))}
                 </select>
@@ -67,7 +67,7 @@ function App() {
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
             {images.map(image=>(
               <div class="w-full rounded">
-                <UploadModal token={facebookUserAccessToken} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + config.captions[Math.floor(Math.random() * captions.length)]}/>
+                <UploadModal token={facebookUserAccessToken} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
                 <div className="pt-1"></div>
                 <Image src={image} alt="" className="rounded-xl" height="200" width="200"/>
               </div>

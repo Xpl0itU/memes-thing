@@ -1,6 +1,5 @@
 import {PostPagePhotoMediaRequest, PostPublishMediaRequest} from "instagram-graph-api";
-
-const INSTAGRAM_PAGE_ID = '17841417742728074';
+import { INSTAGRAM_PAGE_ID } from '../config';
 
 const waitUntil = (condition) => {
     return new Promise((resolve) => {
