@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Modal from 'react-bootstrap';
+import {Modal} from 'react-bootstrap';
 
 export default function Image(props) {
   const [show, setShow] = useState("close");
