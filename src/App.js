@@ -4,6 +4,8 @@ import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
 import Image from './components/Image';
 
+const subreddits = ['memes', 'meme', 'dankmemes', 'Memes_Of_The_Dank', 'me_irl'];
+
 const captions = [
   "#meme #memes #funny #dankmemes #dank #lol #lmao #dank #funnymemes #memesdaily #dankmeme #f #dankmemes #follow #cringe #like #lmfao #anime #hilarious #comedy #offensivememes #fortnite #filthyfrank #nichememes #offensive #jokes #l #bhfyp",
   "#meme #memes #bestmemes #instamemes #funny #funnymemes #dankmemes #offensivememes #edgymemes #spicymemes #nichememes #memepage #funniestmemes #dank #memesdaily #jokes #memesrlife #memestar #memesquad #humor #lmao #igmemes #lol #memeaccount #memer #relatablememes #funnyposts #sillymemes #nichememe #memetime",
@@ -56,11 +58,9 @@ function App() {
                 <label for="sub">Subreddit:</label>
                 <select name="sub" id="sub" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
                   onchange="this.form.submit()">
-                  <option value="memes">r/memes</option>
-                  <option value="meme">r/meme</option>
-                  <option value="dankmemes">r/dankmemes</option>
-                  <option value="Memes_Of_The_Dank">r/Memes_Of_The_Dank</option>
-                  <option value="me_irl">r/me_irl</option>
+                  {subreddits.map(subreddit=>(
+                      <option value={subreddit}>r/{subreddit}</option>
+                  ))}
                 </select>
               </div>
           </form>
