@@ -1,4 +1,3 @@
-import './App.css';
 import React, { useEffect, useState } from "react";
 import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
