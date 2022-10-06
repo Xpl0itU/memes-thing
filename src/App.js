@@ -69,7 +69,7 @@ function App() {
               <div class="w-full rounded">
                 <UploadModal token={facebookUserAccessToken} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
                 <div className="pt-1"></div>
-                <Image src={image} alt="" className="rounded-xl" height="200" width="200"/>
+                <Image src={image}/>
               </div>
             ))}
         </div>
