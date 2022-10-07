@@ -21,7 +21,7 @@ export default function UploadModal(props) {
           <Button variant="secondary" onClick={() => setShow("close")}>
             Close
           </Button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {uploadtoInstagram(props.token, props.image, props.caption, () => setShow("uploaded"));}}>
+          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setShow("uploaded"));}}>
             Continue
           </button>
         </Modal.Footer>

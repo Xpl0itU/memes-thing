@@ -7,6 +7,9 @@ import { captions, subreddits } from './config';
 function App() {
   const [sub, setSub] = useState(subreddits[0]);
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
+  const [instagramAccount, setInstagramAccount] = useState("");
+  const [instagramAccounts, setInstagramAccounts] = useState([]);
+  const [accountsLoaded, setAccountsLoaded] = useState(false);
   let images = getSub(sub);
 
   useEffect(() => {
@@ -29,8 +32,27 @@ function App() {
   const logOutOfFB = () => {
     window.FB.logout(() => {
       setFacebookUserAccessToken(undefined);
+      setAccountsLoaded(false);
     });
   };
+  const getInstagramAccounts = () => {
+    return new Promise((resolve) => {
+      window.FB.api(
+        "me/accounts?fields=instagram_business_account{id,name,profile_picture_url}",
+        { access_token: facebookUserAccessToken },
+        (response) => {
+          resolve(response.data.filter(obj => {
+            return obj.instagram_business_account != undefined;
+          }));
+        }
+      );
+    });
+  };
+  if(facebookUserAccessToken)
+    if(!accountsLoaded) {
+      getInstagramAccounts().then((response) => setInstagramAccounts(response.map(response => response.instagram_business_account)));
+      setAccountsLoaded(true);
+    }
   return (
     <>
       <div>
@@ -61,12 +83,24 @@ function App() {
                   </button>
                 )}
             </div>
+            <div class="pt-2"/>
+            <form value={instagramAccount} onChange={(e) => setInstagramAccount(e.target.value)}>
+              <div class="box">
+                  <label for="account">Select an account:</label>
+                  <select name="account" id="account" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
+                    onchange="this.form.submit()">
+                    {instagramAccounts.map(account => (
+                        <option value={account.id}>{account.name} ({account.id})</option>
+                    ))}
+                  </select>
+                </div>
+            </form>
+          <div class="pt-2"/>
         </div>
-        <div class="pt-2"/>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
             {images.map(image=>(
               <div class="w-full rounded">
-                <UploadModal token={facebookUserAccessToken} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
+                <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
                 <div className="pt-1"></div>
                 <Image src={image}/>
               </div>
