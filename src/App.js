@@ -5,6 +5,7 @@ import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
 import Image from './components/Image';
 import { captions, subreddits } from './config';
+import { accountSelectStyle, subredditSelectStyle } from './styles';
 
 function App() {
   const [sub, setSub] = useState(subreddits[0].value);
@@ -59,25 +60,6 @@ function App() {
     }
   }
 
-  const subredditSelectStyle = {
-    control: base => ({
-      ...base,
-      height: 35,
-      minHeight: 35,
-      width: 220,
-      minWidth: 220
-    })
-  };
-
-  const accountSelectStyle = {
-    control: base => ({
-      ...base,
-      height: 40,
-      minHeight: 40,
-      width: 220,
-      minWidth: 220
-    })
-  };  
   return (
     <>
       <div>
