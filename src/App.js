@@ -81,7 +81,7 @@ function App() {
           <div class="pt-2"></div>
           <div className="flex space-x-2">
             <label class="selectLabel" for="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={subredditSelectStyle} options={subreddits} defaultInputValue={sub} onChange={(e) => setSub(e.value)} />
+            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultInputValue={sub} onChange={(e) => setSub(e.value)} />
           </div>
           <div class="pt-2"/>
             <div className="flex space-x-9">
@@ -101,7 +101,7 @@ function App() {
                 <div class="pt-2" />
                 <div className="flex space-x-5">
                   <label class='selectLabel' for="accountSelect">Account: </label>
-                  <Select id="accountSelect" styles={accountSelectStyle} options={instagramAccounts.map((account) => {
+                  <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
                     return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} height="30px" width="30px"/>{account.name}</div>})
                   })} defaultValue={instagramAccounts.map((account) => {
                     return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} height="30px" width="30px"/>{account.name}</div>})
