@@ -37,6 +37,7 @@ function App() {
       setAccountsLoaded(false);
     });
   };
+  
   const getInstagramAccounts = () => {
     return new Promise((resolve) => {
       window.FB.api(
@@ -50,11 +51,14 @@ function App() {
       );
     });
   };
-  if(facebookUserAccessToken)
+
+  if(facebookUserAccessToken) {
     if(!accountsLoaded) {
       getInstagramAccounts().then((response) => {setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id)});
       setAccountsLoaded(true);
     }
+  }
+
   const subredditSelectStyle = {
     control: base => ({
       ...base,
@@ -64,6 +68,7 @@ function App() {
       minWidth: 220
     })
   };
+
   const accountSelectStyle = {
     control: base => ({
       ...base,
