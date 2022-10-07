@@ -13,4 +13,3 @@ export const captions = [
   "#funny #funnymeme #lol #lmao #funnyvideo #funnyvideos #funnypost #funnyshit #haha #joke #instagood #funnyposts #meme #funnyaf #comedy #funnypictures #instagram #funnyquotes #funnymemes #dankmemes #humor #memes #dank #funnymoments #funnypics",
 ];
 export const FACEBOOK_APP_ID = "1098645864366196"; // Find your App ID in the App Dashboard on Facebook for Developers.
-export const INSTAGRAM_PAGE_ID = '17841417742728074';
