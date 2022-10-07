@@ -31,7 +31,7 @@ function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback) {
         igRequest.execute().then((igResponse) => {
             isLoading = false;
             console.log(igResponse);
-        });
+        }).catch(() => isLoading = false);
       }).catch(() => isLoading = false);
     waitUntil(() => isLoading === false).then(() => {callback()});
 }
