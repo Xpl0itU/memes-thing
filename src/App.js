@@ -81,7 +81,7 @@ function App() {
           <div class="pt-2"></div>
           <div className="flex space-x-2">
             <label class="selectLabel" for="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultInputValue={sub} onChange={(e) => setSub(e.value)} />
+            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => setSub(e.value)} />
           </div>
           <div class="pt-2"/>
             <div className="flex space-x-9">
