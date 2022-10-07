@@ -42,7 +42,7 @@ function App() {
         { access_token: facebookUserAccessToken },
         (response) => {
           resolve(response.data.filter(obj => {
-            return obj.instagram_business_account != undefined;
+            return obj.instagram_business_account !== undefined;
           }));
         }
       );
@@ -50,7 +50,7 @@ function App() {
   };
   if(facebookUserAccessToken)
     if(!accountsLoaded) {
-      getInstagramAccounts().then((response) => setInstagramAccounts(response.map(response => response.instagram_business_account)));
+      getInstagramAccounts().then((response) => {setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id)});
       setAccountsLoaded(true);
     }
   return (
@@ -83,18 +83,20 @@ function App() {
                   </button>
                 )}
             </div>
-            <div class="pt-2"/>
-            <form value={instagramAccount} onChange={(e) => setInstagramAccount(e.target.value)}>
-              <div class="box">
+            {
+              accountsLoaded ? (
+              <><div class="pt-2" /><form value={instagramAccount} onChange={(e) => setInstagramAccount(e.target.value)}>
+                <div class="box">
                   <label for="account">Select an account:</label>
                   <select name="account" id="account" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
                     onchange="this.form.submit()">
                     {instagramAccounts.map(account => (
-                        <option value={account.id}>{account.name} ({account.id})</option>
+                      <option value={account.id}>{account.name} ({account.id})</option>
                     ))}
                   </select>
                 </div>
-            </form>
+              </form></> ) : (undefined)
+            }
           <div class="pt-2"/>
         </div>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
