@@ -83,8 +83,7 @@ function App() {
                   </button>
                 )}
             </div>
-            {
-              accountsLoaded ? (
+            {accountsLoaded ? (
               <>
                 <div class="pt-2" />
                 <form value={instagramAccount} onChange={(e) => setInstagramAccount(e.target.value)}>
@@ -98,8 +97,7 @@ function App() {
                     </select>
                   </div>
                 </form>
-              </> ) : (undefined)
-            }
+              </> ) : (undefined)}
           <div class="pt-2"/>
         </div>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
