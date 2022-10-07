@@ -1,4 +1,4 @@
-import {PostPagePhotoMediaRequest, PostPublishMediaRequest} from "instagram-graph-api";
+import { PostPagePhotoMediaRequest, PostPublishMediaRequest } from "instagram-graph-api";
 
 const waitUntil = (condition) => {
     return new Promise((resolve) => {
