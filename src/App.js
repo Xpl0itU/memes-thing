@@ -37,7 +37,7 @@ function App() {
       setAccountsLoaded(false);
     });
   };
-  
+
   const getInstagramAccounts = () => {
     return new Promise((resolve) => {
       window.FB.api(
@@ -119,7 +119,7 @@ function App() {
             {images.map(image=>(
               <div class="w-full rounded">
                 <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
-                <div className="pt-1"></div>
+                <div className="pt-1"/>
                 <Image src={image}/>
               </div>
             ))}
