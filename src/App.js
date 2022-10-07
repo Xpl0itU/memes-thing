@@ -1,11 +1,13 @@
+import './App.css'
 import React, { useEffect, useState } from "react";
+import Select from 'react-select'
 import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
 import Image from './components/Image';
 import { captions, subreddits } from './config';
 
 function App() {
-  const [sub, setSub] = useState(subreddits[0]);
+  const [sub, setSub] = useState(subreddits[0].value);
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
   const [instagramAccount, setInstagramAccount] = useState("");
   const [instagramAccounts, setInstagramAccounts] = useState([]);
@@ -53,23 +55,25 @@ function App() {
       getInstagramAccounts().then((response) => {setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id)});
       setAccountsLoaded(true);
     }
+    const customStyles = {
+      control: base => ({
+        ...base,
+        height: 35,
+        minHeight: 35,
+        width: 200,
+        minWidth: 200
+      })
+    };    
   return (
     <>
       <div>
         <div class="ml-2">
           <h3 class="text-3xl font-bold">Current subreddit: {sub}</h3>
           <div class="pt-2"></div>
-          <form value={sub} onChange={(e) => setSub(e.target.value)}>
-            <div class="box">
-                <label for="sub">Subreddit:</label>
-                <select name="sub" id="sub" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
-                  onchange="this.form.submit()">
-                  {subreddits.map(subreddit=>(
-                      <option value={subreddit}>r/{subreddit}</option>
-                  ))}
-                </select>
-              </div>
-          </form>
+          <div className="flex space-x-2">
+            <label class="selectLabel" for="subredditSelect">Subreddit: </label>
+            <Select id="subredditSelect" styles={customStyles} options={subreddits} defaultInputValue={sub} onChange={(e) => setSub(e.value)} />
+          </div>
           <div class="pt-2"/>
             <div className="flex space-x-9">
               <label for="loginButton">Login: </label>
@@ -86,17 +90,14 @@ function App() {
             {accountsLoaded ? (
               <>
                 <div class="pt-2" />
-                <form value={instagramAccount} onChange={(e) => setInstagramAccount(e.target.value)}>
-                  <div class="box">
-                    <label for="account">Account: </label>
-                    <select name="account" id="account" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
-                      onchange="this.form.submit()">
-                      {instagramAccounts.map(account => (
-                        <option value={account.id}>{account.name} ({account.id})</option>
-                      ))}
-                    </select>
-                  </div>
-                </form>
+                <div className="flex space-x-5">
+                  <label class='selectLabel' for="accountSelect">Account: </label>
+                  <Select id="accountSelect" styles={customStyles} options={instagramAccounts.map((account) => {
+                    return ({value: account.id, label: account.name})
+                  })} defaultValue={instagramAccounts.map((account) => {
+                    return ({value: account.id, label: account.name})
+                  })[0]} onChange={(e) => setInstagramAccount(e.value)} />
+                </div>
               </> ) : (undefined)}
           <div class="pt-2"/>
         </div>
