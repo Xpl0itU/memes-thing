@@ -84,7 +84,7 @@ function App() {
             <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => setSub(e.value)} />
           </div>
           <div class="pt-2"/>
-            <div className="flex space-x-9">
+            <div className="flex space-x-10">
               <label for="loginButton">Login: </label>
               {facebookUserAccessToken ? (
                   <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
