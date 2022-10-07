@@ -55,15 +55,24 @@ function App() {
       getInstagramAccounts().then((response) => {setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id)});
       setAccountsLoaded(true);
     }
-    const customStyles = {
-      control: base => ({
-        ...base,
-        height: 35,
-        minHeight: 35,
-        width: 200,
-        minWidth: 200
-      })
-    };    
+  const subredditSelectStyle = {
+    control: base => ({
+      ...base,
+      height: 35,
+      minHeight: 35,
+      width: 220,
+      minWidth: 220
+    })
+  };
+  const accountSelectStyle = {
+    control: base => ({
+      ...base,
+      height: 40,
+      minHeight: 40,
+      width: 220,
+      minWidth: 220
+    })
+  };  
   return (
     <>
       <div>
@@ -72,7 +81,7 @@ function App() {
           <div class="pt-2"></div>
           <div className="flex space-x-2">
             <label class="selectLabel" for="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={customStyles} options={subreddits} defaultInputValue={sub} onChange={(e) => setSub(e.value)} />
+            <Select id="subredditSelect" styles={subredditSelectStyle} options={subreddits} defaultInputValue={sub} onChange={(e) => setSub(e.value)} />
           </div>
           <div class="pt-2"/>
             <div className="flex space-x-9">
@@ -92,10 +101,10 @@ function App() {
                 <div class="pt-2" />
                 <div className="flex space-x-5">
                   <label class='selectLabel' for="accountSelect">Account: </label>
-                  <Select id="accountSelect" styles={customStyles} options={instagramAccounts.map((account) => {
-                    return ({value: account.id, label: account.name})
+                  <Select id="accountSelect" styles={accountSelectStyle} options={instagramAccounts.map((account) => {
+                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} height="30px" width="30px"/>{account.name}</div>})
                   })} defaultValue={instagramAccounts.map((account) => {
-                    return ({value: account.id, label: account.name})
+                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} height="30px" width="30px"/>{account.name}</div>})
                   })[0]} onChange={(e) => setInstagramAccount(e.value)} />
                 </div>
               </> ) : (undefined)}
