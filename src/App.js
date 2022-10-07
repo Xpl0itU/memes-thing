@@ -85,17 +85,20 @@ function App() {
             </div>
             {
               accountsLoaded ? (
-              <><div class="pt-2" /><form value={instagramAccount} onChange={(e) => setInstagramAccount(e.target.value)}>
-                <div class="box">
-                  <label for="account">Select an account:</label>
-                  <select name="account" id="account" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
-                    onchange="this.form.submit()">
-                    {instagramAccounts.map(account => (
-                      <option value={account.id}>{account.name} ({account.id})</option>
-                    ))}
-                  </select>
-                </div>
-              </form></> ) : (undefined)
+              <>
+                <div class="pt-2" />
+                <form value={instagramAccount} onChange={(e) => setInstagramAccount(e.target.value)}>
+                  <div class="box">
+                    <label for="account">Account: </label>
+                    <select name="account" id="account" class="bg-green-500 hover:bg-green-700 text-white py-2 px-2 rounded"
+                      onchange="this.form.submit()">
+                      {instagramAccounts.map(account => (
+                        <option value={account.id}>{account.name} ({account.id})</option>
+                      ))}
+                    </select>
+                  </div>
+                </form>
+              </> ) : (undefined)
             }
           <div class="pt-2"/>
         </div>
