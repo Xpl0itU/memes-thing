@@ -102,9 +102,9 @@ function App() {
                 <div className="flex space-x-5">
                   <label class='selectLabel' for="accountSelect">Account: </label>
                   <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
-                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} height="30px" width="30px"/>{account.name}</div>})
+                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px"/>{account.name}</div>})
                   })} defaultValue={instagramAccounts.map((account) => {
-                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} height="30px" width="30px"/>{account.name}</div>})
+                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px"/>{account.name}</div>})
                   })[0]} onChange={(e) => setInstagramAccount(e.value)} />
                 </div>
               </> ) : (undefined)}
