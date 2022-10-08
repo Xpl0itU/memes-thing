@@ -57,11 +57,9 @@ function App() {
     });
   };
 
-  if (facebookUserAccessToken) {
-    if (!accountsLoaded) {
-      getInstagramAccounts().then((response) => { setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id) });
-      setAccountsLoaded(true);
-    }
+  if (facebookUserAccessToken && !accountsLoaded) {
+    getInstagramAccounts().then((response) => { setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id) });
+    setAccountsLoaded(true);
   }
 
   return (
