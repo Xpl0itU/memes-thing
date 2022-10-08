@@ -71,7 +71,7 @@ function App() {
           </div>
           <div class="pt-2" />
           <div className="flex space-x-10">
-            <label for="loginButton">Login: </label>
+            <label style={{ paddingTop: '3px' }} for="loginButton">Login: </label>
             {facebookUserAccessToken ? (
               <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                 Log out of Facebook
@@ -86,7 +86,7 @@ function App() {
             <>
               <div class="pt-2" />
               <div className="flex space-x-5">
-                <label style={{ paddingTop: '5px' }} for="accountSelect">Account: </label>
+                <label style={{ paddingTop: '6px' }} for="accountSelect">Account: </label>
                 <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
                   return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div> })
                 })} defaultValue={instagramAccounts.map((account) => {
