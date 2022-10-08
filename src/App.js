@@ -12,7 +12,11 @@ function App() {
   const [instagramAccount, setInstagramAccount] = useState("");
   const [instagramAccounts, setInstagramAccounts] = useState([]);
   const [accountsLoaded, setAccountsLoaded] = useState(false);
-  let images = getSub(sub);
+  const [images, setImages] = useState([]);
+
+  const reloadImages = () => {
+    getSub(sub).then((imageArray) => setImages(imageArray));
+  };
 
   useEffect(() => {
     window.FB.getLoginStatus((response) => {
@@ -67,7 +71,7 @@ function App() {
           <div class="pt-2"></div>
           <div className="flex space-x-2">
             <label style={{ paddingTop: '5px' }} for="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => setSub(e.value)} />
+            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => { setSub(e.value); reloadImages() }} />
           </div>
           <div class="pt-2" />
           <div className="flex space-x-10">
