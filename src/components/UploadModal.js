@@ -6,7 +6,8 @@ import uploadtoInstagram from "../handlers/instagram_upload";
 const showStates = {
   CONFIRM: "confirm",
   UPLOADED: "uploaded",
-  CLOSE: "close"
+  CLOSE: "close",
+  ERROR: "error"
 }
 
 export default function UploadModal(props) {
@@ -27,7 +28,7 @@ export default function UploadModal(props) {
           <Button variant="secondary" onClick={() => setShow(showStates.CLOSE)}>
             Close
           </Button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setShow(showStates.UPLOADED));}}>
+          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => {uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setShow(showStates.UPLOADED), () => setShow(showStates.ERROR));}}>
             Continue
           </button>
         </Modal.Footer>
@@ -38,6 +39,18 @@ export default function UploadModal(props) {
           <Modal.Title>Uploaded successfully!</Modal.Title>
         </Modal.Header>
         <Modal.Body>The image has been successfully uploaded</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShow(showStates.CLOSE)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={show === showStates.ERROR} onHide={() => setShow(showStates.CLOSE)}>
+        <Modal.Header closeButton>
+          <Modal.Title>An error has ocurred</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Couldn't upload image, it might be too big or you exceeded the 25 daily API posts</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShow(showStates.CLOSE)}>
             Close
