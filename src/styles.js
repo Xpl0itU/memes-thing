@@ -1,10 +1,10 @@
 export const accountSelectStyle = {
     control: base => ({
-      ...base,
-      height: 40,
-      minHeight: 40,
-      width: 220,
-      minWidth: 220
+        ...base,
+        height: 40,
+        minHeight: 40,
+        width: 220,
+        minWidth: 220
     })
 };
 

@@ -1,9 +1,9 @@
 export const subreddits = [
-  {value: 'memes', label: 'r/memes'}, 
-  {value: 'meme', label: 'r/meme'}, 
-  {value: 'dankmemes', label: 'r/dankmemes'}, 
-  {value: 'Memes_Of_The_Dank', label: 'r/Memes_Of_The_Dank'}, 
-  {value: 'me_irl', label: 'r/me_irl'}
+  { value: 'memes', label: 'r/memes' },
+  { value: 'meme', label: 'r/meme' },
+  { value: 'dankmemes', label: 'r/dankmemes' },
+  { value: 'Memes_Of_The_Dank', label: 'r/Memes_Of_The_Dank' },
+  { value: 'me_irl', label: 'r/me_irl' }
 ]; // value: name of the subreddit, label: the name of the subreddit to show in the dropdown
 export const captions = [
   "#meme #memes #funny #dankmemes #dank #lol #lmao #dank #funnymemes #memesdaily #dankmeme #f #dankmemes #follow #cringe #like #lmfao #anime #hilarious #comedy #offensivememes #fortnite #filthyfrank #nichememes #offensive #jokes #l #bhfyp",

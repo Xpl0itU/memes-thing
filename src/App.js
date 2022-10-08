@@ -53,9 +53,9 @@ function App() {
     });
   };
 
-  if(facebookUserAccessToken) {
-    if(!accountsLoaded) {
-      getInstagramAccounts().then((response) => {setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id)});
+  if (facebookUserAccessToken) {
+    if (!accountsLoaded) {
+      getInstagramAccounts().then((response) => { setInstagramAccounts(response.map(response => response.instagram_business_account)); setInstagramAccount(response.map(response => response.instagram_business_account)[0].id) });
       setAccountsLoaded(true);
     }
   }
@@ -70,41 +70,41 @@ function App() {
             <label class="selectLabel" for="subredditSelect">Subreddit: </label>
             <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => setSub(e.value)} />
           </div>
-          <div class="pt-2"/>
-            <div className="flex space-x-10">
-              <label for="loginButton">Login: </label>
-              {facebookUserAccessToken ? (
-                  <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
-                    Log out of Facebook
-                  </button>
-                ) : (
-                  <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
-                    Login with Facebook
-                  </button>
-                )}
-            </div>
-            {accountsLoaded ? (
-              <>
-                <div class="pt-2" />
-                <div className="flex space-x-5">
-                  <label class='selectLabel' for="accountSelect">Account: </label>
-                  <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
-                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px"/>{account.name}</div>})
-                  })} defaultValue={instagramAccounts.map((account) => {
-                    return ({value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px"/>{account.name}</div>})
-                  })[0]} onChange={(e) => setInstagramAccount(e.value)} />
-                </div>
-              </> ) : (undefined)}
-          <div class="pt-2"/>
+          <div class="pt-2" />
+          <div className="flex space-x-10">
+            <label for="loginButton">Login: </label>
+            {facebookUserAccessToken ? (
+              <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                Log out of Facebook
+              </button>
+            ) : (
+              <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                Login with Facebook
+              </button>
+            )}
+          </div>
+          {accountsLoaded ? (
+            <>
+              <div class="pt-2" />
+              <div className="flex space-x-5">
+                <label class='selectLabel' for="accountSelect">Account: </label>
+                <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
+                  return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div> })
+                })} defaultValue={instagramAccounts.map((account) => {
+                  return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div> })
+                })[0]} onChange={(e) => setInstagramAccount(e.value)} />
+              </div>
+            </>) : (undefined)}
+          <div class="pt-2" />
         </div>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
-            {images.map(image => (
-              <div class="w-full rounded">
-                <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
-                <div className="pt-1"/>
-                <Image src={image}/>
-              </div>
-            ))}
+          {images.map(image => (
+            <div class="w-full rounded">
+              <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]} />
+              <div className="pt-1" />
+              <Image src={image} />
+            </div>
+          ))}
         </div>
       </div>
     </>
