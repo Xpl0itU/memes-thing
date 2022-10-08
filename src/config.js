@@ -18,4 +18,3 @@ export const captions = [
   "#memes #dankmemes #dailymemes #funnymemes #nichememes #jokes #laugh #edgymemes #comedy #spicymemes #memestagram #wholesomememes #dankmemesdaily #follow #humor #funny #fun #bestmemes #haha #offensivememes #memesdaily #instagood #viral #memer #like #meme #memes😂 #lol",
   "#funny #funnymeme #lol #lmao #funnyvideo #funnyvideos #funnypost #funnyshit #haha #joke #instagood #funnyposts #meme #funnyaf #comedy #funnypictures #instagram #funnyquotes #funnymemes #dankmemes #humor #memes #dank #funnymoments #funnypics",
 ]; // array of hashtags to be chosen randomly at upload time
-export const FACEBOOK_APP_ID = "1098645864366196"; // Find your App ID in the App Dashboard on Facebook for Developers.
