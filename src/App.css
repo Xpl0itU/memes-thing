@@ -1,3 +1,13 @@
 .selectLabel {
     padding-top: 5px;
 }
+
+.loading-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loading-screen__text {
+    font-size: 24px;
+}

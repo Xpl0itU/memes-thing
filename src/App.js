@@ -9,11 +9,13 @@ import { accountSelectStyle, subredditSelectStyle } from './styles';
 
 function App() {
   const [sub, setSub] = useState(subreddits[0].value);
+  const [isLoading, setIsLoading] = useState(true);
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
   const [instagramAccount, setInstagramAccount] = useState("");
   const [instagramAccounts, setInstagramAccounts] = useState([]);
   const [accountsLoaded, setAccountsLoaded] = useState(false);
-  let images = getSub(sub);
+  const [images, setImages] = useState([]);
+  getSub(sub).then((e) => setImages(e)).then(() => setIsLoading(false));
 
   useEffect(() => {
     window.FB.getLoginStatus((response) => {
@@ -62,51 +64,55 @@ function App() {
 
   return (
     <>
-      <div>
-        <div class="ml-2">
-          <h3 class="text-3xl font-bold">Current subreddit: {sub}</h3>
-          <div class="pt-2"></div>
-          <div className="flex space-x-2">
-            <label class="selectLabel" for="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => setSub(e.value)} />
-          </div>
-          <div class="pt-2" />
-          <div className="flex space-x-10">
-            <label for="loginButton">Login: </label>
-            {facebookUserAccessToken ? (
-              <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
-                Log out of Facebook
-              </button>
-            ) : (
-              <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
-                Login with Facebook
-              </button>
-            )}
-          </div>
-          {accountsLoaded ? (
-            <>
-              <div class="pt-2" />
-              <div className="flex space-x-5">
-                <label class='selectLabel' for="accountSelect">Account: </label>
-                <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
-                  return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div> })
-                })} defaultValue={instagramAccounts.map((account) => {
-                  return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div> })
-                })[0]} onChange={(e) => setInstagramAccount(e.value)} />
+      {isLoading ?
+        (<div className="loading-screen">
+          <p className="loading-screen__text">Loading posts from Reddit, please wait...</p>
+        </div>) : (
+          <div>
+            <div class="ml-2">
+              <h3 class="text-3xl font-bold">Current subreddit: {sub}</h3>
+              <div class="pt-2"></div>
+              <div className="flex space-x-2">
+                <label class="selectLabel" for="subredditSelect">Subreddit: </label>
+                <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => setSub(e.value)} />
               </div>
-            </>) : (undefined)}
-          <div class="pt-2" />
-        </div>
-        <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
-          {images.map(image => (
-            <div class="w-full rounded">
-              <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]} />
-              <div className="pt-1" />
-              <Image src={image} />
+              <div class="pt-2" />
+              <div className="flex space-x-10">
+                <label for="loginButton">Login: </label>
+                {facebookUserAccessToken ? (
+                  <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                    Log out of Facebook
+                  </button>
+                ) : (
+                  <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                    Login with Facebook
+                  </button>
+                )}
+              </div>
+              {accountsLoaded ? (
+                <>
+                  <div class="pt-2" />
+                  <div className="flex space-x-5">
+                    <label class='selectLabel' for="accountSelect">Account: </label>
+                    <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
+                      return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div> })
+                    })} defaultValue={instagramAccounts.map((account) => {
+                      return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div> })
+                    })[0]} onChange={(e) => setInstagramAccount(e.value)} />
+                  </div>
+                </>) : (undefined)}
+              <div class="pt-2" />
             </div>
-          ))}
-        </div>
-      </div>
+            <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
+              {images.map(image => (
+                <div class="w-full rounded">
+                  <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]} />
+                  <div className="pt-1" />
+                  <Image src={image} />
+                </div>
+              ))}
+            </div>
+          </div>)}
     </>
   );
 }
