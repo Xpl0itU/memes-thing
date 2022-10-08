@@ -12,9 +12,8 @@ const waitUntil = (condition) => {
     })
 }
 
-function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback, errorCallback) {
+function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback) {
     let isLoading = true;
-    let errorHappened = false;
     const request = new PostPagePhotoMediaRequest(
         token,
         pageID,
@@ -32,9 +31,9 @@ function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback, erro
         igRequest.execute().then((igResponse) => {
             isLoading = false;
             console.log(igResponse);
-        }).catch(() => { isLoading = false; errorHappened = true });
-      }).catch(() => { isLoading = false; errorHappened = true });
-    waitUntil(() => isLoading === false).then(errorHappened ? (() => {callback()}) : (() => {errorCallback()}));
+        }).catch(() => isLoading = false);
+      }).catch(() => isLoading = false);
+    waitUntil(() => isLoading === false).then(() => {callback()});
 }
 
 export default uploadtoInstagram;
