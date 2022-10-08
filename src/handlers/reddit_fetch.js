@@ -6,7 +6,7 @@ function isPinned(url) {
     return !url.pinned && !url.stickied;
 }
 
-async function getSub(sub) {
+function getSub(sub) {
     const request = new XMLHttpRequest();
     request.open('GET', `https://www.reddit.com/r/${sub}/hot.json?limit=20`, false);
     request.send(null);
