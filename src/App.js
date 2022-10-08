@@ -19,6 +19,7 @@ function App() {
   };
 
   useEffect(() => {
+    reloadImages();
     window.FB.getLoginStatus((response) => {
       setFacebookUserAccessToken(response.authResponse?.accessToken);
     });
