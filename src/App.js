@@ -98,7 +98,7 @@ function App() {
           <div class="pt-2"/>
         </div>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
-            {images.map(image=>(
+            {images.map(image => (
               <div class="w-full rounded">
                 <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]}/>
                 <div className="pt-1"/>

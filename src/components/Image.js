@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Modal} from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 const showStates = {
   SHOW: "show",
