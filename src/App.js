@@ -23,7 +23,7 @@ function App() {
     window.FB.getLoginStatus((response) => {
       setFacebookUserAccessToken(response.authResponse?.accessToken);
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const logInToFB = () => {
     window.FB.login(
