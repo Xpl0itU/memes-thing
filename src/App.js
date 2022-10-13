@@ -67,12 +67,12 @@ function App() {
           <h3 className="text-3xl font-bold">Current subreddit: {sub}</h3>
           <div className="pt-2"></div>
           <div className="flex space-x-2">
-            <label style={{ paddingTop: '5px' }} for="subredditSelect">Subreddit: </label>
+            <label style={{ paddingTop: '5px' }} htmlFor="subredditSelect">Subreddit: </label>
             <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => { setSub(e.value); reloadImages() }} />
           </div>
           <div className="pt-2" />
           <div className="flex space-x-10">
-            <label style={{ paddingTop: '3px' }} for="loginButton">Login: </label>
+            <label style={{ paddingTop: '3px' }} htmlFor="loginButton">Login: </label>
             {facebookUserAccessToken ? (
               <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
                 Log out of Facebook
@@ -87,7 +87,7 @@ function App() {
             <>
               <div className="pt-2" />
               <div className="flex space-x-5">
-                <label style={{ paddingTop: '6px' }} for="accountSelect">Account: </label>
+                <label style={{ paddingTop: '6px' }} htmlFor="accountSelect">Account: </label>
                 <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
                   return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} className='rounded' alt='' height="30px" width="30px" />{account.name}</div> })
                 })} defaultValue={instagramAccounts.map((account) => {
