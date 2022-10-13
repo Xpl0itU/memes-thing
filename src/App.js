@@ -63,14 +63,14 @@ function App() {
   return (
     <>
       <div>
-        <div class="ml-2">
-          <h3 class="text-3xl font-bold">Current subreddit: {sub}</h3>
-          <div class="pt-2"></div>
+        <div className="ml-2">
+          <h3 className="text-3xl font-bold">Current subreddit: {sub}</h3>
+          <div className="pt-2"></div>
           <div className="flex space-x-2">
             <label style={{ paddingTop: '5px' }} for="subredditSelect">Subreddit: </label>
             <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => { setSub(e.value); reloadImages() }} />
           </div>
-          <div class="pt-2" />
+          <div className="pt-2" />
           <div className="flex space-x-10">
             <label style={{ paddingTop: '3px' }} for="loginButton">Login: </label>
             {facebookUserAccessToken ? (
@@ -85,7 +85,7 @@ function App() {
           </div>
           {accountsLoaded ? (
             <>
-              <div class="pt-2" />
+              <div className="pt-2" />
               <div className="flex space-x-5">
                 <label style={{ paddingTop: '6px' }} for="accountSelect">Account: </label>
                 <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
@@ -95,11 +95,11 @@ function App() {
                 })[0]} onChange={(e) => setInstagramAccount(e.value)} />
               </div>
             </>) : (undefined)}
-          <div class="pt-2" />
+          <div className="pt-2" />
         </div>
         <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
           {images.map(image => (
-            <div class="w-full rounded">
+            <div className="w-full rounded">
               <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]} />
               <div className="pt-1" />
               <Image src={image} />
