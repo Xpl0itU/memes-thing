@@ -68,7 +68,7 @@ function App() {
           <div className="pt-2"></div>
           <div className="flex space-x-2">
             <label style={{ paddingTop: '5px' }} htmlFor="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} onChange={(e) => { setSub(e.value); reloadImages() }} />
+            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} value={sub} onChange={(e) => { setSub(e.value); reloadImages() }} />
           </div>
           <div className="pt-2" />
           <div className="flex space-x-10">
