@@ -7,7 +7,7 @@ import { captions, subreddits } from './config';
 import { accountSelectStyle, subredditSelectStyle } from './styles';
 
 function App() {
-  const [sub, setSub] = useState(subreddits[0].value);
+  const [sub, setSub] = useState(subreddits[0]);
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
   const [instagramAccount, setInstagramAccount] = useState("");
   const [instagramAccounts, setInstagramAccounts] = useState([]);
@@ -15,7 +15,7 @@ function App() {
   const [images, setImages] = useState([]);
 
   const reloadImages = () => {
-    getSub(sub).then((imageArray) => setImages(imageArray));
+    getSub(sub.value).then((imageArray) => setImages(imageArray));
   };
 
   useEffect(() => {
@@ -64,11 +64,11 @@ function App() {
     <>
       <div>
         <div className="ml-2">
-          <h3 className="text-3xl font-bold">Current subreddit: {sub}</h3>
+          <h3 className="text-3xl font-bold">Current subreddit: {sub.value}</h3>
           <div className="pt-2"></div>
           <div className="flex space-x-2">
             <label style={{ paddingTop: '5px' }} htmlFor="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} value={sub} onChange={(e) => { setSub(e.value); reloadImages() }} />
+            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={subreddits[0]} value={sub} onChange={(e) => { setSub(e); reloadImages() }} />
           </div>
           <div className="pt-2" />
           <div className="flex space-x-10">
