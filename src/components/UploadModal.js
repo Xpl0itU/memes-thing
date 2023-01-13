@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -9,6 +11,7 @@ import uploadtoInstagram from "../handlers/instagram_upload";
 
 const showStates = {
   CONFIRM: "confirm",
+  ERROR: "error",
   UPLOADED: "uploaded",
   CLOSE: "close"
 }
@@ -25,7 +28,7 @@ export default function UploadModal(props) {
   };
 
   const handleConfirm = () => {
-    uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setOpen(showStates.UPLOADED));
+    uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setOpen(showStates.UPLOADED), () => setOpen(showStates.ERROR));
   };
 
   return (
@@ -55,26 +58,13 @@ export default function UploadModal(props) {
         </DialogActions>
       </Dialog>
 
-      <Dialog
-        open={open === showStates.UPLOADED}
-        onClose={handleClose}
-        aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"
-      >
-        <DialogTitle id="alert-dialog-title">
-          {"Uploaded successfully!"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-          The image has been successfully uploaded
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose} autoFocus>
-            Close
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Snackbar open={open === showStates.UPLOADED} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
+        <Alert severity="success">The image has been uploaded successfully!</Alert>
+      </Snackbar>
+
+      <Snackbar open={open === showStates.ERROR} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
+        <Alert severity="error">An error has ocurred while uploading the image</Alert>
+      </Snackbar>
     </div>
   );
 }
