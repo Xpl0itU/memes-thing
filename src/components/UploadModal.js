@@ -11,6 +11,7 @@ import uploadtoInstagram from "../handlers/instagram_upload";
 
 const showStates = {
   CONFIRM: "confirm",
+  UPLOADING: "uploading",
   ERROR: "error",
   UPLOADED: "uploaded",
   CLOSE: "close"
@@ -28,6 +29,8 @@ export default function UploadModal(props) {
   };
 
   const handleConfirm = () => {
+    handleClose();
+    setOpen(showStates.UPLOADING);
     uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setOpen(showStates.UPLOADED), () => setOpen(showStates.ERROR));
   };
 
@@ -57,6 +60,10 @@ export default function UploadModal(props) {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar open={open === showStates.UPLOADING} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
+        <Alert severity="info">Uploading image, please wait...</Alert>
+      </Snackbar>
 
       <Snackbar open={open === showStates.UPLOADED} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
         <Alert severity="success">The image has been uploaded successfully!</Alert>
