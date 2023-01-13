@@ -102,9 +102,10 @@ function App() {
                     id="accountSelect"
                     label="Account"
                     onChange={(event) => setInstagramAccount(event.target.value)}
+                    defaultValue={instagramAccounts[0].id}
                   >
                     {instagramAccounts.map(account => (
-                      <MenuItem value={account.id}><div className="flex space-x-5"><img src={account.profile_picture_url} className='rounded' alt='' height="30px" width="30px" />{account.name}</div></MenuItem>
+                      <MenuItem value={account.id}><div className="flex space-x-5" style={{ alignItems: 'center' }}><img src={account.profile_picture_url} className='rounded' alt='' height="30px" width="30px" />{account.name}</div></MenuItem>
                     ))}
                   </Select>
               </FormControl>
