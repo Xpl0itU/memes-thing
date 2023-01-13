@@ -1,6 +1,10 @@
-import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal, Button } from 'react-bootstrap';
+import { useState } from "react";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import uploadtoInstagram from "../handlers/instagram_upload";
 
 const showStates = {
@@ -10,40 +14,67 @@ const showStates = {
 }
 
 export default function UploadModal(props) {
-  const [show, setShow] = useState(showStates.CLOSE);
+  const [open, setOpen] = useState(showStates.CLOSE);
+
+  const handleClickOpen = () => {
+    setOpen(showStates.CONFIRM);
+  };
+
+  const handleClose = () => {
+    setOpen(showStates.CLOSE);
+  };
+
+  const handleConfirm = () => {
+    uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setOpen(showStates.UPLOADED));
+  };
 
   return (
-    <>
-      <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => setShow(showStates.CONFIRM)}>
+    <div>
+      <Button variant="outlined" onClick={handleClickOpen}>
         Upload
-      </button>
-
-      <Modal show={show === showStates.CONFIRM} onHide={() => setShow(showStates.CLOSE)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Upload this image?</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Please confirm to continue</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(showStates.CLOSE)}>
-            Close
-          </Button>
-          <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" onClick={() => { uploadtoInstagram(props.token, props.pageID, props.image, props.caption, () => setShow(showStates.UPLOADED)); }}>
+      </Button>
+      <Dialog
+        open={open === showStates.CONFIRM}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Upload this image?"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          Please confirm to continue
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleConfirm} autoFocus>
             Continue
-          </button>
-        </Modal.Footer>
-      </Modal>
+          </Button>
+        </DialogActions>
+      </Dialog>
 
-      <Modal show={show === showStates.UPLOADED} onHide={() => setShow(showStates.CLOSE)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Uploaded successfully!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>The image has been successfully uploaded</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShow(showStates.CLOSE)}>
+      <Dialog
+        open={open === showStates.UPLOADED}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Uploaded successfully!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          The image has been successfully uploaded
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} autoFocus>
             Close
           </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
+        </DialogActions>
+      </Dialog>
+    </div>
   );
 }

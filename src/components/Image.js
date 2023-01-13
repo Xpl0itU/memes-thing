@@ -1,6 +1,8 @@
-import React, { useState } from "react";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Modal } from 'react-bootstrap';
+import { useState } from "react";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
 
 const showStates = {
   SHOW: "show",
@@ -12,10 +14,19 @@ export default function Image(props) {
 
   return (
     <>
-      <Modal show={show === showStates.SHOW} onHide={() => setShow(showStates.CLOSE)}>
-        <Modal.Header closeButton />
-        <Modal.Body><img src={props.src} alt="" className="rounded-xl" height='500' width='500' /></Modal.Body>
-      </Modal>
+      <Dialog
+        open={show === showStates.SHOW}
+        onClose={() => { setShow(showStates.CLOSE) }}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <img src={props.src} alt="" className="rounded-xl" height='500' width='500' />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => { setShow(showStates.CLOSE) }}>Close</Button>
+        </DialogActions>
+      </Dialog>
 
       <img src={props.src} alt="" className="rounded-xl" height='200' width='200' onClick={() => setShow(showStates.SHOW)} />
     </>

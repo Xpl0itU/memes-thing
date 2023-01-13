@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
-import Select from 'react-select'
 import getSub from './handlers/reddit_fetch';
 import UploadModal from './components/UploadModal';
 import Image from './components/Image';
 import { captions, subreddits } from './config';
-import { accountSelectStyle, subredditSelectStyle } from './styles';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
 function App() {
-  const [sub, setSub] = useState(subreddits[0]);
   const [facebookUserAccessToken, setFacebookUserAccessToken] = useState("");
   const [instagramAccount, setInstagramAccount] = useState("");
   const [instagramAccounts, setInstagramAccounts] = useState([]);
   const [accountsLoaded, setAccountsLoaded] = useState(false);
   const [images, setImages] = useState([]);
 
-  const reloadImages = () => {
-    getSub(sub.value).then((imageArray) => setImages(imageArray));
+  const reloadImages = (subreddit) => {
+    getSub(subreddit).then((imageArray) => setImages(imageArray));
   };
 
   useEffect(() => {
-    reloadImages();
+    reloadImages(subreddits[0]);
     window.FB.getLoginStatus((response) => {
       setFacebookUserAccessToken(response.authResponse?.accessToken);
     });
@@ -64,36 +66,49 @@ function App() {
     <>
       <div>
         <div className="ml-2">
-          <h3 className="text-3xl font-bold">Current subreddit: {sub.value}</h3>
-          <div className="pt-2"></div>
-          <div className="flex space-x-2">
-            <label style={{ paddingTop: '5px' }} htmlFor="subredditSelect">Subreddit: </label>
-            <Select id="subredditSelect" styles={subredditSelectStyle} isSearchable={false} options={subreddits} defaultValue={sub} value={sub} onChange={(e) => { setSub(e); reloadImages() }} />
-          </div>
+          <Box sx={{ maxWidth: 250, marginTop: 2 }}>
+            <FormControl fullWidth>
+              <InputLabel id="subredditSelectLabel">Subreddit</InputLabel>
+                <Select
+                  labelId="subredditSelectLabel"
+                  id="subredditSelect"
+                  defaultValue={subreddits[0]}
+                  label="Subreddit"
+                  onChange={(event) => { reloadImages(event.target.value) }}
+                >
+                  {subreddits.map(subreddit => (
+                    <MenuItem value={subreddit}>r/{subreddit}</MenuItem>
+                  ))}
+                </Select>
+            </FormControl>
+          </Box>
           <div className="pt-2" />
-          <div className="flex space-x-10">
-            <label style={{ paddingTop: '3px' }} htmlFor="loginButton">Login: </label>
-            {facebookUserAccessToken ? (
-              <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
-                Log out of Facebook
-              </button>
-            ) : (
-              <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
-                Login with Facebook
-              </button>
-            )}
-          </div>
+          {facebookUserAccessToken ? (
+            <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+              Log out of Facebook
+            </button>
+          ) : (
+            <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+              Login with Facebook
+            </button>
+          )}
           {accountsLoaded ? (
             <>
-              <div className="pt-2" />
-              <div className="flex space-x-5">
-                <label style={{ paddingTop: '6px' }} htmlFor="accountSelect">Account: </label>
-                <Select id="accountSelect" styles={accountSelectStyle} isSearchable={false} options={instagramAccounts.map((account) => {
-                  return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} className='rounded' alt='' height="30px" width="30px" />{account.name}</div> })
-                })} defaultValue={instagramAccounts.map((account) => {
-                  return ({ value: account.id, label: <div className="flex space-x-5"><img src={account.profile_picture_url} className='rounded' alt='' height="30px" width="30px" />{account.name}</div> })
-                })[0]} onChange={(e) => setInstagramAccount(e.value)} />
-              </div>
+              <Box sx={{ maxWidth: 250, marginTop: 2 }}>
+              <FormControl fullWidth>
+                <InputLabel id="accountSelectLabel">Account</InputLabel>
+                  <Select
+                    labelId="accountSelectLabel"
+                    id="accountSelect"
+                    label="Account"
+                    onChange={(event) => setInstagramAccount(event.target.value)}
+                  >
+                    {instagramAccounts.map((account) => {
+                      <MenuItem value={account.id}><div className="flex space-x-5"><img src={account.profile_picture_url} className='rounded' alt='' height="30px" width="30px" />{account.name}</div></MenuItem>
+                    })}
+                  </Select>
+              </FormControl>
+            </Box>
             </>) : (undefined)}
           <div className="pt-2" />
         </div>
