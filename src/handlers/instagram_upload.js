@@ -22,9 +22,7 @@ function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback, erro
         imageCaption
     );
     request.execute().then((response) => {
-        console.log("a");
         if(response.data.id) {
-            console.log("b");
             const igRequest = new PostPublishMediaRequest(
                 token,
                 pageID,
@@ -33,13 +31,12 @@ function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback, erro
     
             igRequest.execute().then((igResponse) => {
                 isLoading = false;
-            }).catch(() => isLoading = false);
+            }).catch(() => { isLoading = false; errorHappened = true; });
         } else {
-            console.log("c");
             errorHappened = true;
             isLoading = false;
         }
-    }).catch(() => isLoading = false);
+    }).catch(() => { isLoading = false; errorHappened = true; });
     waitUntil(() => isLoading === false).then(() => { errorHappened ? errorCallback() : callback() });
 }
 
