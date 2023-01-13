@@ -21,7 +21,6 @@ function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback) {
         imageCaption
     );
     request.execute().then((response) => {
-        console.log(response.data.id);
         const igRequest = new PostPublishMediaRequest(
             token,
             pageID,
@@ -30,7 +29,6 @@ function uploadtoInstagram(token, pageID, imageURL, imageCaption, callback) {
 
         igRequest.execute().then((igResponse) => {
             isLoading = false;
-            console.log(igResponse);
         }).catch(() => isLoading = false);
     }).catch(() => isLoading = false);
     waitUntil(() => isLoading === false).then(() => { callback() });
