@@ -21,14 +21,14 @@ export default function Image(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogContent>
-          <img src={props.src} alt="" className="rounded-xl" height='500' width='500' />
+          <img src={props.src} alt="" height='500' width='500' />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => { setShow(showStates.CLOSE) }}>Close</Button>
         </DialogActions>
       </Dialog>
 
-      <img src={props.src} alt="" className="rounded-xl" height='200' width='200' onClick={() => setShow(showStates.SHOW)} />
+      <img src={props.src} alt="" height='200' width='200' onClick={() => setShow(showStates.SHOW)} />
     </>
   );
 }

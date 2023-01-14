@@ -65,8 +65,8 @@ function App() {
   return (
     <>
       <div>
-        <div className="ml-2">
-          <Box sx={{ maxWidth: 250, marginTop: 2 }}>
+        <div id="controls">
+          <div className="selector">
             <FormControl fullWidth>
               <InputLabel id="subredditSelectLabel">Subreddit</InputLabel>
                 <Select
@@ -81,20 +81,19 @@ function App() {
                   ))}
                 </Select>
             </FormControl>
-          </Box>
-          <div className="pt-2" />
+          </div>
           {facebookUserAccessToken ? (
-            <button onClick={logOutOfFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+            <button onClick={logOutOfFB} id='loginButton'>
               Log out of Facebook
             </button>
           ) : (
-            <button onClick={logInToFB} id='loginButton' className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+            <button onClick={logInToFB} id='loginButton'>
               Login with Facebook
             </button>
           )}
           {accountsLoaded ? (
             <>
-              <Box sx={{ maxWidth: 250, marginTop: 2 }}>
+              <div className="selector">
               <FormControl fullWidth>
                 <InputLabel id="accountSelectLabel">Account</InputLabel>
                   <Select
@@ -105,19 +104,17 @@ function App() {
                     defaultValue={instagramAccounts[0].id}
                   >
                     {instagramAccounts.map(account => (
-                      <MenuItem value={account.id}><div className="flex space-x-5" style={{ alignItems: 'center' }}><img src={account.profile_picture_url} className='rounded' alt='' height="30px" width="30px" />{account.name}</div></MenuItem>
+                      <MenuItem value={account.id}><div className="account"><img src={account.profile_picture_url} alt='' height="30px" width="30px" />{account.name}</div></MenuItem>
                     ))}
                   </Select>
               </FormControl>
-            </Box>
+            </div>
             </>) : (undefined)}
-          <div className="pt-2" />
         </div>
-        <div className="container mx-auto space-y-2 lg:space-y-0 lg:gap-2 lg:grid lg:grid-cols-4">
+        <div id="images">
           {images.map(image => (
-            <div className="w-full rounded">
+            <div className="image">
               <UploadModal token={facebookUserAccessToken} pageID={instagramAccount} image={image} caption={'For more follow @memesconchi\n•\n•\n•\n•\n•\n' + captions[Math.floor(Math.random() * captions.length)]} />
-              <div className="pt-1" />
               <Image src={image} />
             </div>
           ))}
