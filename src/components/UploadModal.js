@@ -70,7 +70,7 @@ export default function UploadModal(props) {
       </Snackbar>
 
       <Snackbar open={open === showStates.ERROR} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }} onClose={handleClose}>
-        <Alert severity="error">An error has ocurred while uploading the image</Alert>
+        <Alert severity="error">An error has occurred while uploading the image</Alert>
       </Snackbar>
     </div>
   );
