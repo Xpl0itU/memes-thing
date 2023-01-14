@@ -21,7 +21,7 @@ export default function Image(props) {
         aria-describedby="alert-dialog-description"
       >
         <DialogContent>
-          <img src={props.src} alt="" width='500' />
+          <img src={props.src} alt="" style={{ maxHeight: "100%", maxWidth: "100%" }} />
         </DialogContent>
         <DialogActions>
           <Button onClick={() => { setShow(showStates.CLOSE) }}>Close</Button>
