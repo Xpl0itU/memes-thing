@@ -6,7 +6,7 @@ export default function initFacebookSDK() {
           appId: import.meta.env.VITE_APP_FACEBOOK_APP_ID,
           cookie: true,
           xfbml: true,
-          version: "v15.0",
+          version: "v17.0",
         });
 
         resolve();
