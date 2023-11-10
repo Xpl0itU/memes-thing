@@ -13,7 +13,7 @@
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.14.8",
     "@mui/material": "^5.14.8",
-    "axios": "^1.5.0",
+    "axios": "^1.6.0",
     "instagram-graph-api": "^5.0.1",
     "preact": "^10.16.0"
   },
